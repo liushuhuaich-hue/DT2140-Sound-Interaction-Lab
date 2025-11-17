@@ -55,10 +55,9 @@ thunder.createDSP(audioContext, 1024)
 
 function accelerationChange(accx, accy, accz) {
     const magnitude = Math.sqrt(accx * accx + accy * accy + accz * accz)
-    const bigMoveThreshold = 4;  // adjustable
+    const bigMoveThreshold = 27;  // adjustable
     const isBigMove = magnitude > bigMoveThreshold;
 
-    // 3. 触发 Thunder
     if (isBigMove && thunderArmed) {
         playAudio();
         thunderArmed = false;
