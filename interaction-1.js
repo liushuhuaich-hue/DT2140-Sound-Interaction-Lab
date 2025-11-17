@@ -11,6 +11,8 @@ let dspNode = null;
 let dspNodeParams = null;
 let jsonParams = null;
 
+let bellArmed = false;
+
 // Change here to ("tuono") depending on your wasm file name
 const dspName = "russianbell";
 const instance = new FaustWasm2ScriptProcessor(dspName);
