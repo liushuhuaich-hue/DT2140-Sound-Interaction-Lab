@@ -59,18 +59,18 @@ function accelerationChange(accx, accy, accz) {
 
 function rotationChange(rotx, roty, rotz) {
     const heading = rotz;    // current
-    const target = 320;      //365-45 
+    const target = 45;      //360-45 
     const tolerance = 25;    // error +-25
 
     const isNorthEast = Math.abs(heading - target) < tolerance;
 
-    //trigger
+    //trigger only when entering direction
     if (isNorthEast && !bellArmed) {
         playAudio();      
-        bellArmed = true; // 上锁，避免在小范围抖动时疯狂连响
+        bellArmed = true; // lock
     }
 
-    // 一旦离开东北区域，就解锁，下次再进来还能再敲一次
+    // unlock when leaving north east area
     if (!isNorthEast && bellArmed) {
         bellArmed = false;
     }
