@@ -14,7 +14,7 @@ let jsonParams = null;
 let bellArmed = false;
 
 // Change here to ("tuono") depending on your wasm file name
-const dspName = "russianbell";
+const dspName = "scifi";
 const instance = new FaustWasm2ScriptProcessor(dspName);
 
 // output to window or npm package module
@@ -27,7 +27,7 @@ if (typeof module === "undefined") {
 }
 
 // The name should be the same as the WASM file, so change tuono with brass if you use brass.wasm
-russianbell.createDSP(audioContext, 1024)
+scifi.createDSP(audioContext, 1024)
     .then(node => {
         dspNode = node;
         dspNode.connect(audioContext.destination);
@@ -54,6 +54,7 @@ russianbell.createDSP(audioContext, 1024)
 //==========================================================================================
 
 function accelerationChange(accx, accy, accz) {
+
     // playAudio()
 }
 
