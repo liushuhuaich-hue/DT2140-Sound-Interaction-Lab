@@ -11,6 +11,8 @@ let dspNode = null;
 let dspNodeParams = null;
 let jsonParams = null;
 
+let thunderArmed = false;
+
 // Change here to ("tuono") depending on your wasm file name
 const dspName = "thunder";
 const instance = new FaustWasm2ScriptProcessor(dspName);
@@ -52,7 +54,22 @@ thunder.createDSP(audioContext, 1024)
 //==========================================================================================
 
 function accelerationChange(accx, accy, accz) {
+    const magnitude = Math.sqrt(accx * accx + accy * accy + accz * accz)
+    const bigMoveThreshold = 4;  // adjustable
+    const isBigMove = magnitude > bigMoveThreshold;
+
+    // 3. 触发 Thunder
+    if (isBigMove && thunderArmed) {
+        playAudio();
+        thunderArmed = false;
+    }
+
+    // 4. 离开大动作区 → 解锁
+    if (!isBigMove && !thunderArmed) {
+        thunderArmed = true;
+    }
     // playAudio()
+
 }
 
 function rotationChange(rotx, roty, rotz) {
@@ -102,8 +119,8 @@ function playAudio() {
     if (audioContext.state === 'suspended') {
         return;
     }
-    dspNode.setParamValue("/englishBell/gate", 1)
-    setTimeout(() => { dspNode.setParamValue("/englishBell/gate", 0) }, 100);
+    dspNode.setParamValue("/thunder/rumble", 1)
+    setTimeout(() => { dspNode.setParamValue("/thunder/rumble", 0) }, 200);
 }
 
 //==========================================================================================
