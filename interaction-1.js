@@ -125,6 +125,8 @@ function playAudio() {
     // them printed on the console of your browser when you load the page)
     // For example if you change to a bell sound, here you could use "/churchBell/gate" instead of
     // "/thunder/rumble".
+    dspNode.setParamValue("/scifi/volume", 0.8);   // 声音大小
+    dspNode.setParamValue("/scifi/Freq", 800);     // 声音频率，大约 800Hz
     dspNode.setParamValue("/scifi/trigger", 1)
     setTimeout(() => { dspNode.setParamValue("/scifi/trigger", 0) }, 200);
 }

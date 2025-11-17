@@ -59,7 +59,7 @@ function accelerationChange(accx, accy, accz) {
     const bigMoveThreshold = 900;  // adjustable
     const isBigMove = magnitude > bigMoveThreshold;
     const now = millis();
-    const recentlyMoved = (now - movetimer) < 200; // 最近 200ms 内动过
+    const recentlyMoved = (now - movetimer) < 200; //moved within last 
 
     if (isBigMove && recentlyMoved && thunderArmed) {
         playAudio();
@@ -69,7 +69,7 @@ function accelerationChange(accx, accy, accz) {
     if (!isBigMove && !thunderArmed) {
         thunderArmed = true;
     }
-    // playAudio()
+  
 
 }
 
