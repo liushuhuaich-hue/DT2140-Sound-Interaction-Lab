@@ -11,7 +11,8 @@ let dspNode = null;
 let dspNodeParams = null;
 let jsonParams = null;
 
-let thunderArmed = false;
+let movetimer = 0;
+let thunderArmed = 0;
 
 // Change here to ("tuono") depending on your wasm file name
 const dspName = "thunder";
@@ -54,16 +55,17 @@ thunder.createDSP(audioContext, 1024)
 //==========================================================================================
 
 function accelerationChange(accx, accy, accz) {
-    const magnitude = Math.sqrt(accx * accx + accy * accy + accz * accz)
+    const magnitude = Math.sqrt(accx * accx + accy * accy + accz * accz);
     const bigMoveThreshold = 900;  // adjustable
     const isBigMove = magnitude > bigMoveThreshold;
+    const now = millis();
+    const recentlyMoved = (now - movetimer) < 200; // 最近 200ms 内动过
 
-    if (isBigMove && thunderArmed) {
+    if (isBigMove && recentlyMoved && thunderArmed) {
         playAudio();
         thunderArmed = false;
     }
 
-    // 4. 离开大动作区 → 解锁
     if (!isBigMove && !thunderArmed) {
         thunderArmed = true;
     }
