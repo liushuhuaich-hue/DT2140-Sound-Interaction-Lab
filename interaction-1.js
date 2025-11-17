@@ -58,15 +58,15 @@ function accelerationChange(accx, accy, accz) {
 }
 
 function rotationChange(rotx, roty, rotz) {
-    const heading = rotz;    // 当前朝向角度（单位：度）
-    const target = 45;       // 45° 大概是东北方向（在北0°和东90°之间）
-    const tolerance = 25;    // 允许的误差范围 ±25°，可以自己调
+    const heading = rotz;    // current
+    const target = 320;      //365-45 
+    const tolerance = 25;    // error +-25
 
     const isNorthEast = Math.abs(heading - target) < tolerance;
 
-    // 刚进入“东北区域”的那一刻，敲一次钟
+    //trigger
     if (isNorthEast && !bellArmed) {
-        playAudio();      // 敲 Russian bell
+        playAudio();      
         bellArmed = true; // 上锁，避免在小范围抖动时疯狂连响
     }
 
