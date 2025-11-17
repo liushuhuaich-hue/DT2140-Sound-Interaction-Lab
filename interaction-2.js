@@ -11,8 +11,7 @@ let dspNode = null;
 let dspNodeParams = null;
 let jsonParams = null;
 
-let movetimer = 0;
-let thunderArmed = 0;
+
 
 // Change here to ("tuono") depending on your wasm file name
 const dspName = "thunder";
