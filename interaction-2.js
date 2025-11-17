@@ -12,7 +12,7 @@ let dspNodeParams = null;
 let jsonParams = null;
 
 
-let movetimer = false;
+let lastmovetime = false;
 let thunderArmed = false;
 
 
@@ -61,7 +61,7 @@ function accelerationChange(accx, accy, accz) {
     const bigMoveThreshold = 900;  // adjustable
     const isBigMove = magnitude > bigMoveThreshold;
     const now = millis();
-    const recentlyMoved = (now - movetimer) < 200; //moved within last 
+    const recentlyMoved = (now - lastmovetime) < 200; //moved within last 
 
     if (isBigMove && recentlyMoved && thunderArmed) {
         playAudio();
@@ -84,7 +84,7 @@ function mousePressed() {
 }
 
 function deviceMoved() {
-    movetimer = millis();
+    lastmovetime = millis();
     statusLabels[2].style("color", "pink");
 }
 
