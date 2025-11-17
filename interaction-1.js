@@ -56,6 +56,22 @@ function accelerationChange(accx, accy, accz) {
 }
 
 function rotationChange(rotx, roty, rotz) {
+    const heading = rotz;    // 当前朝向角度（单位：度）
+    const target = 45;       // 45° 大概是东北方向（在北0°和东90°之间）
+    const tolerance = 25;    // 允许的误差范围 ±25°，可以自己调
+
+    const isNorthEast = Math.abs(heading - target) < tolerance;
+
+    // 刚进入“东北区域”的那一刻，敲一次钟
+    if (isNorthEast && !bellArmed) {
+        playAudio();      // 敲 Russian bell
+        bellArmed = true; // 上锁，避免在小范围抖动时疯狂连响
+    }
+
+    // 一旦离开东北区域，就解锁，下次再进来还能再敲一次
+    if (!isNorthEast && bellArmed) {
+        bellArmed = false;
+    }
 }
 
 function mousePressed() {
@@ -106,8 +122,8 @@ function playAudio() {
     // them printed on the console of your browser when you load the page)
     // For example if you change to a bell sound, here you could use "/churchBell/gate" instead of
     // "/thunder/rumble".
-    dspNode.setParamValue("/thunder/rumble", 1)
-    setTimeout(() => { dspNode.setParamValue("/thunder/rumble", 0) }, 100);
+    dspNode.setParamValue("/russianBell/gate", 1)
+    setTimeout(() => { dspNode.setParamValue("/russianBell/gate", 0) }, 200);
 }
 
 //==========================================================================================
