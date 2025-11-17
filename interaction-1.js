@@ -83,10 +83,10 @@ function mousePressed() {
     // Use this for debugging from the desktop!
 }
 
-function deviceMoved() {
-    lastmovetime = millis();
-    statusLabels[2].style("color", "pink");
-}
+// function deviceMoved() {
+//     lastmovetime = millis();
+//     statusLabels[2].style("color", "pink");
+// }
 
 function deviceTurned() {
     threshVals[1] = turnAxis;
