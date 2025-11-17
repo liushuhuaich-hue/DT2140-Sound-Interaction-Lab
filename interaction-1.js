@@ -12,8 +12,7 @@ let dspNodeParams = null;
 let jsonParams = null;
 
 let bellArmed = false;
-let movetimer = false;
-let thunderArmed = false;
+
 
 // Change here to ("tuono") depending on your wasm file name
 const dspName = "scifi";
@@ -85,7 +84,7 @@ function mousePressed() {
 }
 
 function deviceMoved() {
-    movetimer = millis();
+    lastmovetime = millis();
     statusLabels[2].style("color", "pink");
 }
 
